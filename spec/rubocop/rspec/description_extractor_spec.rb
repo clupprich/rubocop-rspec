@@ -10,7 +10,7 @@ RSpec.describe RuboCop::RSpec::DescriptionExtractor do
         docstring: "Checks foo\n\nLong description",
         to_s: 'RuboCop::Cop::RSpec::Cop',
         type: :class,
-        name: 'Foo',
+        name: 'Cop',
         tags: [instance_double(YARD::Tags::Tag, tag_name: 'abstract')]
       ),
       instance_double(
@@ -37,6 +37,10 @@ RSpec.describe RuboCop::RSpec::DescriptionExtractor do
         tags: []
       )
     ]
+  end
+
+  before do
+    stub_const('RuboCop::Cop::RSpec::Foo', Class.new(RuboCop::Cop::Cop))
   end
 
   it 'builds a hash of descriptions' do
